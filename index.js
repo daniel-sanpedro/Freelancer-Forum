@@ -6,7 +6,8 @@
 
 // New freelancers continue to appear every few seconds, and the average starting price is updated accordingly.
 
-
+// freelancers
+// array of objects
 const freelancers = [
   { name: "Dr. Slice", price: 25, occupation: "gardener" },
   { name: "Dr. Pressure", price: 51, occupation: "programmer" },
@@ -18,11 +19,14 @@ const freelancers = [
   { name: "Prof. Goose", price: 72, occupation: "driver" },
 ];
 
+// include a max count of freelancers
+const  = 10;
 
 // every few seconds a new freelancers will be added to the available freelancers
 //        add set interval to 3000 few seconds
+const  = setInterval(addShape, 3000);
 
-// define arrays for possible names and occupations  
+// define arrays for possible names and occupations
 
 // define initial array of freelancers
 
@@ -35,3 +39,22 @@ const freelancers = [
 
 // write a function to calculate the average starting price of the freelancers array
 //         when should this function be called to update the displayed message
+
+// state
+// The program initializes an array of possible names and an array of possible occupations.\
+
+// The program initializes an array of at least two freelancers with names, occupations, and starting prices.
+
+// functionality
+// The initial array of freelancers is rendered onto the page.
+
+// A function is written that correctly calculates the average starting price of the freelancers array.
+
+// A function is written that generates a freelancer with a random name, occupation, and starting price. This object is pushed into the freelancers array.
+
+// An interval is set to add a freelancer and rerender every few seconds.
+
+// DOM
+// The DOM is updated to reflect the average starting price.
+
+// `document.querySelector` is correctly used to select existing DOM elements.
