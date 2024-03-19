@@ -1,60 +1,82 @@
-// A visitor enters the website and finds a list of available freelancers. Each freelancer has a name, an occupation, and a starting price for their services. They observe on the list Alice, the writer with a starting price of $30, and Bob, who is a teacher, has a starting price of $50.
+// FREELANCER FORUM
 
-// The visitor also finds a message that displays the average starting price of all the freelancers. In this example, the average starting price is $40.
-
-// A few seconds later, a new listing appears for a freelancer named Carol, who is a programmer and has a starting price of $70. The average starting price is updated to $50.
-
-// New freelancers continue to appear every few seconds, and the average starting price is updated accordingly.
-
-// freelancers
-// array of objects
+// copied freelancers array
 const freelancers = [
-  { name: "Dr. Slice", price: 25, occupation: "gardener" },
-  { name: "Dr. Pressure", price: 51, occupation: "programmer" },
-  { name: "Prof. Possibility", price: 43, occupation: "teacher" },
-  { name: "Prof. Prism", price: 81, occupation: "teacher" },
-  { name: "Dr. Impulse", price: 43, occupation: "teacher" },
-  { name: "Prof. Spark", price: 76, occupation: "programmer" },
-  { name: "Dr. Wire", price: 47, occupation: "teacher" },
-  { name: "Prof. Goose", price: 72, occupation: "driver" },
+  { name: "Dr. Slice", price: 25, job: "gardener" },
+  { name: "Dr. Pressure", price: 51, job: "coder" },
+  { name: "Prof. Possibility", price: 43, job: "teacher" },
+  { name: "Prof. Prism", price: 81, job: "teacher" },
+  { name: "Dr. Impulse", price: 43, job: "teacher" },
+  { name: "Prof. Spark", price: 76, job: "coder" },
+  { name: "Dr. Wire", price: 47, job: "teacher" },
+  { name: "Prof. Goose", price: 72, job: "driver" },
 ];
+// selects all spans
+const averagePriceSpan = document.querySelector("span");
+// selects all tbody elements
+const freelancersTbody = document.querySelector("tbody");
 
-// include a max count of freelancers
-const  = 10;
+// this function is used to calculate the average price stored in the freelance array
+// gets average price
+function getAveragePrice() {
+  // 'total' store the sum of all freelancers prices, start at zero
+  let total = 0;
+  // this is a for loop that iterates over each freelancer
+  for (let i = 0; i < freelancers.length; i++) {
+    // inside the loop adds each preelancers price to the 'total'
+    total = total + freelancers[i].price;
+  }
+  // loop ends calculates the average price by dividing the total
+  // toFixed(2) it transforms it into a string representation with exactly two decimal places
+  return (total / freelancers.length).toFixed(2);
+}
 
-// every few seconds a new freelancers will be added to the available freelancers
-//        add set interval to 3000 few seconds
-const  = setInterval(addShape, 3000);
+// function is responsible for rendering the list of freelancers onto the webpage. lets break down what each line does
+function drawFreelancers() {
+  const listItems = [];
+  // the loop runs as many times as there are freelancers in the array.
+  for (let i = 0; i < freelancers.length; i++) {
+    const listItem = document.createElement("tr");
+    // listItem concatenates html strings to create a table row with three cells <td>
+    listItem.innerHTML =
+      "<td>" +
+      freelancers[i].name +
+      "</td>" +
+      "<td>" +
+      freelancers[i].job +
+      "</td>" +
+      "<td>$" +
+      freelancers[i].price +
+      "</td>";
+    listItems.push(listItem);
+  }
+  freelancersTbody.innerHTML = "";
+  for (let i = 0; i < listItems.length; i++) {
+    freelancersTbody.appendChild(listItems[i]);
+  }
+  averagePriceSpan.textContent = getAveragePrice();
+}
+function addNewbieFreelancer() {
+  if (freelancers.length < 3) {
+    freelancers.push({
+      name: "daniel",
+      job: "professional thumb wrestler",
+      price: 70,
+    });
 
-// define arrays for possible names and occupations
+    return;
+  }
 
-// define initial array of freelancers
+  const names = ["daniel", "bob", "charlie", "david", "eve"];
+  const jobs = ["gardener", "coder", "pro thumb wrestler", "driver"];
+  const name = names[Math.floor(Math.random() * names.length)];
+  const job = jobs[Math.floor(Math.random() * jobs.length)];
+  const price = Math.floor(Math.random() * 75) + 25;
 
-// determine how to display freelancers information
-
-// write a function to render the initial freelancers data
-
-// write a function to generate a random freelancer
-//         is this function being called in an interval
-
-// write a function to calculate the average starting price of the freelancers array
-//         when should this function be called to update the displayed message
-
-// state
-// The program initializes an array of possible names and an array of possible occupations.\
-
-// The program initializes an array of at least two freelancers with names, occupations, and starting prices.
-
-// functionality
-// The initial array of freelancers is rendered onto the page.
-
-// A function is written that correctly calculates the average starting price of the freelancers array.
-
-// A function is written that generates a freelancer with a random name, occupation, and starting price. This object is pushed into the freelancers array.
-
-// An interval is set to add a freelancer and rerender every few seconds.
-
-// DOM
-// The DOM is updated to reflect the average starting price.
-
-// `document.querySelector` is correctly used to select existing DOM elements.
+  freelancers.push({ name, job, price });
+}
+// 3000 milliseconds = 3 seconds
+setInterval(() => {
+  addNewbieFreelancer();
+  drawFreelancers();
+}, 3000);
